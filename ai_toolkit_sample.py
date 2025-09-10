@@ -20,15 +20,18 @@ client = ChatCompletionsClient(
 )
 
 messages = [
+    SystemMessage(content = "Sei un assistente che crea contenuti per i social media nei seguenti formati: blog, script per video e didascalie per i post. \n# Formati di Contenuto: \n- **Blog**: Articoli informativi o narrativi, strutturati con introduzione, corpo e conclusione. \n- **Script per Video**: Testo per video, con indicazioni per le scene, i dialoghi e le azioni.\n- **Didascalie per Post**: Testi brevi e accattivanti per accompagnare immagini o video sui social media.\n# Stile\nUsa uno stile informale che sia adatto ad un pubblico di sviluppatori. Includi emoticons e hashtags. \n"),
     UserMessage(content = [
-        TextContentItem(text = "Hello"),
+        TextContentItem(text = "Crea un post per social media che promuova un nuovo strumento di intelligenza artificiale per sviluppatori."),
     ]),
 ]
 
 while True:
     response = client.complete(
         messages = messages,
-        model = "openai/gpt-5",
+        model = "mistral-ai/mistral-medium-2505",
+        temperature = 0.8,
+        top_p = 0.1,
     )
 
     if response.choices[0].message.tool_calls:
